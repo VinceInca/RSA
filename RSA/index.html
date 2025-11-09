@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Firma Digitale RSA</title>
+
+  <!-- ✅ Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Optional: per icone -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+  <style>
+    body {
+      background-color: #f8f9fa;
+      padding: 30px;
+    }
+    .card {
+      border-radius: 1rem;
+      box-shadow: 0 0.25rem 0.5rem rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+    }
+    .card-header {
+      background-color: #0d6efd;
+      color: white;
+      font-weight: bold;
+    }
+    input[readonly] {
+      background-color: #f0f0f0;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1 class="text-center mb-4"><i class="bi bi-shield-lock"></i> Firma Digitale RSA</h1>
+
+    <!-- 🔑 Generazione chiavi -->
+    <div class="card">
+      <div class="card-header">🔑 Generatore di chiavi RSA</div>
+      <div class="card-body">
+        <div class="mb-3">
+          <button class="btn btn-primary" onclick="RSA()">Genera chiavi</button>
+        </div>
+
+        <div class="row g-3">
+          <div class="col-md-4">
+            <label class="form-label">p</label>
+            <input type="text" id="campoP" class="form-control" readonly>
+          </div>
+          <div class="col-md-4">
+            <label class="form-label">q</label>
+            <input type="text" id="campoQ" class="form-control" readonly>
+          </div>
+          <div class="col-md-4">
+            <label class="form-label">N</label>
+            <input type="text" id="campoN" class="form-control" readonly>
+          </div>
+          <div class="col-md-4">
+            <label class="form-label">V</label>
+            <input type="text" id="campoV" class="form-control" readonly>
+          </div>
+          <div class="col-md-4">
+            <label class="form-label">Chiave privata (nPriv)</label>
+            <input type="text" id="npriv" class="form-control" readonly>
+          </div>
+          <div class="col-md-4">
+            <label class="form-label">Chiave pubblica (nPub)</label>
+            <input type="text" id="campoNPub" class="form-control" readonly>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ✍️ Firma del messaggio -->
+    <div class="card">
+      <div class="card-header">✍️ Firma del messaggio</div>
+      <div class="card-body">
+        <div class="mb-3">
+          <label class="form-label">Messaggio</label>
+          <input type="text" id="campoMessaggio" class="form-control" placeholder="Scrivi qui il messaggio da firmare">
+        </div>
+        <button class="btn btn-success" onclick="firmaMessaggio()"><i class="bi bi-pencil-square"></i> Firma il messaggio</button>
+
+        <hr>
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label class="form-label">Impronta (hash)</label>
+            <input type="text" id="campoHash" class="form-control" readonly>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Firma digitale</label>
+            <input type="text" id="campoFirma" class="form-control" readonly>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ✅ Verifica della firma -->
+    <div class="card">
+      <div class="card-header">✅ Verifica della firma</div>
+      <div class="card-body">
+        <button class="btn btn-warning mb-3" onclick="preparaVerifica()">
+          <i class="bi bi-copy"></i> Copia messaggio e firma per la verifica
+        </button>
+
+        <div class="mb-3">
+          <label class="form-label">Messaggio ricevuto</label>
+          <input type="text" id="campoMessaggioVerifica" class="form-control">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Firma ricevuta</label>
+          <input type="text" id="campoFirmaVerifica" class="form-control">
+        </div>
+        <button class="btn btn-info text-white" onclick="verificaFirma()">
+          <i class="bi bi-check-circle"></i> Verifica la firma
+        </button>
+
+        <div class="mt-4">
+          <label class="form-label">Risultato verifica</label>
+          <input type="text" id="campoRisultato" class="form-control text-center fw-bold" readonly>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ✅ Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script src="script.js"></script>
